@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe InvisibleCaptcha::ViewHelpers, type: :helper do
+RSpec.describe InvisibleCaptcha::ViewHelpers, type: :helper do
   before(:each) do
     allow(Time.zone).to receive(:now).and_return(Time.zone.parse('Feb 19 1986'))
     allow(InvisibleCaptcha).to receive(:css_strategy).and_return("display:none;")
@@ -53,7 +53,7 @@ describe InvisibleCaptcha::ViewHelpers, type: :helper do
       expect(invisible_captcha(visual_honeypots: false)).to match(/display:none/)
     end
   end
-
+  
   it 'should set spam timestamp' do
     invisible_captcha
     expect(session[:invisible_captcha_timestamp]).to eq(Time.zone.now.iso8601)
